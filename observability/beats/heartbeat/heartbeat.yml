@@ -4,14 +4,14 @@ heartbeat.monitors:
   urls:
     - http://elasticsearch:9200
     - http://kibana:5601
-    - http://localhost:8080
+    - http://app:8080
 
 - type: icmp
   schedule: '@every 5s'
   hosts:
     - elasticsearch
     - kibana
-    - localhost
+    - app
     - metricbeat
 
 processors:

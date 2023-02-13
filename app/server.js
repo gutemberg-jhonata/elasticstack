@@ -3,7 +3,7 @@ import apm from 'elastic-apm-node'
 apm.start({
   serviceName: 'elasticstack',
   //secretToken: '',
-  serverUrl: 'http://localhost:8200',
+  serverUrl: 'http://apm:8200',
   environment: 'production'
 })
 
