@@ -1,4 +1,7 @@
 import apm from 'elastic-apm-node'
+import pino from 'pino-http'
+
+//const logger = pino()
 
 apm.start({
   serviceName: 'elasticstack',
@@ -11,10 +14,11 @@ import express from 'express'
 const app = express()
 
 app.use(express.json())
+app.use(pino())
 
 app.get('/', (req, res) => {
   apm.startTransaction("index", "GET")
-  console.debug("APM")
+  req.log.info("Hello!")
   res.send({ hello: "ok" })
   apm.endTransaction()
 })
@@ -24,6 +28,7 @@ app.get('/error', (req, res) => {
   try {
     throw new Error('Ups, something broke!')
   } catch (err) {
+    req.log.error("Error!")
     apm.captureError(err)
     apm.endTransaction()
     throw err

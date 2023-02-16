@@ -5,7 +5,12 @@ services:
       - "8080:8080"
     networks: 
       - observability
-
+  nginx:
+    build: ./nginx
+    ports:
+      - "8000:80"
+    networks:
+      - observability
 networks:
   observability:
     external: true    
